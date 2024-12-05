@@ -33,6 +33,7 @@ import {
   bookmarkOutline,
   bookmarkSharp
 } from 'ionicons/icons';
+import {ClientService} from "./services/client/client.service";
 
 @Component({
   selector: 'app-root',
@@ -53,8 +54,9 @@ export class AppComponent {
     {title: 'Login', url: '/login-screen', icon: 'warning'},
 
   ];
+  showMenu: boolean = true;
 
-  constructor() {
+  constructor(private clientService: ClientService) {
     addIcons({
       mailOutline,
       mailSharp,
@@ -69,7 +71,10 @@ export class AppComponent {
       warningOutline,
       warningSharp,
       bookmarkOutline,
-      bookmarkSharp
+      bookmarkSharp,
+    });
+    this.clientService.showMenu$.subscribe(isOn =>{
+      this.showMenu = !isOn;
     });
   }
 }
